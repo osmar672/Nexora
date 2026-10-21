@@ -1,0 +1,13 @@
+# Auditoría y pruebas de aplicaciones web en laboratorios autorizados
+nmap
+curl
+wget
+jq
+python
+python-pip
+sqlmap
+nikto
+gobuster
+ffuf
+whatweb
+mitmproxy

@@ -1,0 +1,13 @@
+# Build output and temporary directories
+out/
+work/
+*.iso
+*.iso.sig
+*.sha256
+*.log
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

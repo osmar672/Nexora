@@ -1,0 +1,12 @@
+# Forense digital y análisis de archivos
+sleuthkit
+testdisk
+foremost
+binwalk
+exiftool
+libewf
+gnu-netcat
+yara
+clamav
+smartmontools
+ddrescue

@@ -1,0 +1,16 @@
+# Diagnóstico y análisis de redes
+nmap
+wireshark-qt
+tcpdump
+bind
+whois
+openbsd-netcat
+socat
+traceroute
+mtr
+iperf3
+ethtool
+iproute2
+inetutils
+openssh
+openvpn

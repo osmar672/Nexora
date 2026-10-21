@@ -1,0 +1,10 @@
+# Ingeniería inversa y depuración
+radare2
+gdb
+lldb
+strace
+ltrace
+binutils
+patchelf
+hexyl
+xxd

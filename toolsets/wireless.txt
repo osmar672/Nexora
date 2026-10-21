@@ -1,0 +1,6 @@
+# Auditoría inalámbrica; requiere hardware compatible y autorización
+aircrack-ng
+iw
+wireless_tools
+usbutils
+pciutils
