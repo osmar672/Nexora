@@ -62,7 +62,7 @@ values = {
     "iso_label": "NEXORA_202610",
     "iso_publisher": "Nexora Linux Project",
     "iso_application": "Nexora Linux Dev and Security Live",
-    "iso_version": "0.1.0",
+    "iso_version": "0.2.0",
     "install_dir": "nexora",
 }
 for key, value in values.items():
@@ -123,22 +123,45 @@ Session=plasma.desktop
 Relogin=false
 SDDM
 
+# Install Nexora's branded front-end and the optional BlackArch toolkit manager.
+mkdir -p "${PROFILE_DIR}/airootfs/usr/share/nexora/toolsets"
+mkdir -p "${PROFILE_DIR}/airootfs/usr/local/bin"
+cp "${ROOT_DIR}/scripts/install-toolset.sh" "${PROFILE_DIR}/airootfs/usr/share/nexora/install-toolset.sh"
+cp "${ROOT_DIR}"/toolsets/*.txt "${PROFILE_DIR}/airootfs/usr/share/nexora/toolsets/"
+install -m 0755 "${ROOT_DIR}/scripts/nexora-installer.sh" \
+  "${PROFILE_DIR}/airootfs/usr/local/bin/nexora-installer"
+install -m 0755 "${ROOT_DIR}/scripts/blackarch-manager.sh" \
+  "${PROFILE_DIR}/airootfs/usr/local/bin/blackarch-manager.sh"
+install -m 0755 "${ROOT_DIR}/scripts/enable-blackarch.sh" \
+  "${PROFILE_DIR}/airootfs/usr/local/bin/enable-blackarch.sh"
+install -m 0755 "${ROOT_DIR}/scripts/list-blackarch-groups.sh" \
+  "${PROFILE_DIR}/airootfs/usr/local/bin/list-blackarch-groups.sh"
+install -m 0755 "${ROOT_DIR}/scripts/install-blackarch-group.sh" \
+  "${PROFILE_DIR}/airootfs/usr/local/bin/install-blackarch-group.sh"
+ln -sfn /usr/local/bin/blackarch-manager.sh \
+  "${PROFILE_DIR}/airootfs/usr/local/bin/nexora-toolbox"
+
 mkdir -p "${PROFILE_DIR}/airootfs/usr/share/applications"
 cat > "${PROFILE_DIR}/airootfs/usr/share/applications/nexora-installer.desktop" <<'DESKTOP'
 [Desktop Entry]
 Type=Application
 Name=Instalar Nexora Linux
-Comment=Abre el instalador guiado de Arch Linux
-Exec=konsole -e sudo archinstall
+Comment=Asistente gráfico de instalación de Nexora Linux
+Exec=konsole -e /usr/local/bin/nexora-installer
 Icon=system-software-install
 Terminal=false
 Categories=System;
 DESKTOP
-
-# Embed a copy of the toolset installer in the live environment for reference.
-mkdir -p "${PROFILE_DIR}/airootfs/usr/share/nexora/toolsets"
-cp "${ROOT_DIR}/scripts/install-toolset.sh" "${PROFILE_DIR}/airootfs/usr/share/nexora/install-toolset.sh"
-cp "${ROOT_DIR}"/toolsets/*.txt "${PROFILE_DIR}/airootfs/usr/share/nexora/toolsets/"
+cat > "${PROFILE_DIR}/airootfs/usr/share/applications/nexora-toolbox.desktop" <<'DESKTOP'
+[Desktop Entry]
+Type=Application
+Name=Nexora Toolset Manager
+Comment=Gestiona categorías opcionales de herramientas BlackArch
+Exec=/usr/local/bin/nexora-toolbox gui
+Icon=applications-utilities
+Terminal=false
+Categories=System;Utility;
+DESKTOP
 
 cat <<EOF2
 Perfil Nexora preparado en: ${PROFILE_DIR}

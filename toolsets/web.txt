@@ -9,5 +9,4 @@ sqlmap
 nikto
 gobuster
 ffuf
-whatweb
 mitmproxy

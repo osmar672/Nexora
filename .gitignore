@@ -1,6 +1,7 @@
 # Build output and temporary directories
 out/
 work/
+profile/
 *.iso
 *.iso.sig
 *.sha256

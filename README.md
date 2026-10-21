@@ -1,6 +1,6 @@
 # Nexora Linux — Dev & Security
 
-Nexora Linux es un proyecto comunitario basado en Arch Linux, enfocado en programación, DevOps y ciberseguridad autorizada. Usa Archiso para generar una ISO live con KDE Plasma y un conjunto inicial de herramientas.
+Nexora Linux **0.2.0** es un proyecto comunitario basado en Arch Linux, enfocado en programación, DevOps y ciberseguridad autorizada. Consulta [`CHANGELOG.md`](CHANGELOG.md) para ver los cambios. Usa Archiso para generar una ISO live con KDE Plasma y un conjunto inicial de herramientas.
 
 > **Estado:** prototipo de desarrollo. No es una distribución estable ni auditada. Las herramientas de pruebas de seguridad deben utilizarse únicamente en sistemas propios o con autorización explícita.
 
@@ -15,15 +15,16 @@ Guía paso a paso: [`docs/BUILD-WINDOWS.md`](docs/BUILD-WINDOWS.md).
 - KDE Plasma y SDDM en el entorno live.
 - Navegador, terminal, editor, Git, Python y Node.js.
 - Herramientas iniciales de red y seguridad defensiva/pentest autorizado.
-- Acceso al instalador guiado `archinstall`.
+- **Nexora Installer 0.2.0:** asistente gráfico propio de KDE que prepara una configuración de instalación con selección de toolsets. Archinstall sigue siendo el motor de particionado/instalación en esta fase.
+- **Nexora Toolset Manager:** menú KDE para habilitar opcionalmente BlackArch, consultar categorías disponibles e instalar una categoría elegida.
 - Manifiestos de paquetes por áreas para ampliar el sistema.
 - Scripts para preparar el perfil y generar la ISO.
 
 ## Qué NO promete todavía
 
 - No incluye literalmente miles de herramientas dentro de la ISO base.
-- No tiene un instalador gráfico propio; el lanzador abre `archinstall`.
-- Los paquetes del entorno live no se copian automáticamente al sistema instalado. Después de instalar Nexora/Arch, clona el repositorio y ejecuta el instalador de toolsets que necesites.
+- El asistente de instalación ya tiene una interfaz gráfica inicial, pero todavía delega el particionado, los usuarios y la instalación del sistema en Archinstall. No es aún un instalador de disco 100 % gráfico e independiente.
+- Los paquetes del entorno live no se copian automáticamente al sistema instalado. Los toolsets que selecciones en Nexora Installer se pasan a Archinstall para su instalación en el sistema destino; BlackArch sigue siendo opcional y se configura después.
 - El proyecto no está auditado para uso empresarial ni debe utilizarse como sistema de producción sin pruebas adicionales.
 
 ## Construir la ISO desde una VM con Arch Linux
@@ -75,13 +76,20 @@ BlackArch mantiene un repositorio adicional de herramientas de seguridad basado 
 ```text
 Nexora-Linux/
 ├── README.md
+├── VERSION
+├── CHANGELOG.md
 ├── LICENSE
 ├── .gitignore
 ├── scripts/
 │   ├── bootstrap-profile.sh
 │   ├── build-iso.sh
 │   ├── check-packages.sh
-│   └── install-toolset.sh
+│   ├── install-toolset.sh
+│   ├── nexora-installer.sh
+│   ├── blackarch-manager.sh
+│   ├── enable-blackarch.sh
+│   ├── list-blackarch-groups.sh
+│   └── install-blackarch-group.sh
 ├── toolsets/
 │   ├── iso-packages.txt
 │   ├── dev.txt
@@ -93,6 +101,7 @@ Nexora-Linux/
 ├── docs/
 │   ├── BUILD-WINDOWS.md
 │   ├── TOOLING-STRATEGY.md
+│   ├── NEXORA-INSTALLER.md
 │   └── BLACKARCH-OPTIONAL.md
 └── branding/
     └── README.md
@@ -103,5 +112,5 @@ Nexora-Linux/
 1. Construir la ISO base y probarla en QEMU/VirtualBox.
 2. Corregir problemas de arranque, red, KDE y paquetes.
 3. Añadir branding y temas propios.
-4. Mejorar la instalación para aplicar las selecciones de software al sistema instalado.
-5. Preparar sumas SHA-256, notas de versión, pruebas de actualización y una política de seguridad.
+4. Sustituir progresivamente la fase terminal por un instalador totalmente gráfico, después de elegir e integrar un motor mantenible (por ejemplo, Calamares) y probar sus módulos.
+5. Añadir pruebas reproducibles, sumas SHA-256, notas de versión, pruebas de actualización y una política de seguridad.

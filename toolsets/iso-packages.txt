@@ -5,6 +5,7 @@ base-devel
 plasma-meta
 sddm
 konsole
+kdialog
 dolphin
 kate
 ark
@@ -52,7 +53,7 @@ gobuster
 testdisk
 sleuthkit
 binwalk
-exiftool
+perl-image-exiftool
 yara
 radare2
 strace

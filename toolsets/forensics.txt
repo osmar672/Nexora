@@ -3,7 +3,7 @@ sleuthkit
 testdisk
 foremost
 binwalk
-exiftool
+perl-image-exiftool
 libewf
 gnu-netcat
 yara
